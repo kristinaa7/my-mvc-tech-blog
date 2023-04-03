@@ -1,6 +1,18 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
 
+// The `/api/blogs` endpoint
+router.get('/', async (req, res) => {
+  try {
+    const userData = await Blog.findAll({
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//CREATE new blog post
 router.post('/', async (req, res) => {
   try {
     const newBlog = await Blog.create({
@@ -14,6 +26,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// DELETE blog post
 router.delete('/:id', async (req, res) => {
   try {
     const blogData = await Blog.destroy({
